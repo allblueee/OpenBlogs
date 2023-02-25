@@ -7,7 +7,7 @@ import NavHeader from "./components/Navigation/NavHeader.vue";
   <el-affix :offset="0">
     <NavHeader />
   </el-affix>
-
+<div style="height: 100px;"></div>
   <RouterView />
 </template>
 

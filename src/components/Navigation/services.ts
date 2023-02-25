@@ -10,7 +10,7 @@ export async function validateToken(token: string) {
     })
 }
 
-export async function login({ email, password }: IuserInfo) {
+export async function SLogin({ email, password }: IuserInfo) {
     return request<String>('http://localhost:5173/api/auth/login', {
         method: 'POST',
         data: {
@@ -19,3 +19,4 @@ export async function login({ email, password }: IuserInfo) {
         }
     })
 }
+

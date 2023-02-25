@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { useRequest } from 'vue-hooks-plus'
-import { getUserInfo } from './services'
 
 </script>
 <template>
