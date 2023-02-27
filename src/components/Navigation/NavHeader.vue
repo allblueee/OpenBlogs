@@ -43,13 +43,14 @@
 <script setup lang="ts">
 import { useEmailStore, useTokenStore } from "@/stores";
 import { useRequest } from "vue-hooks-plus";
-import { SLogin, validateToken } from "./services"
+import { SLogin, SValidateToken } from "./services"
 import type { IuserInfo } from "@/type";
 import { storeToRefs } from "pinia";
 
-const { getToken,setToken, setIsLogin } = useTokenStore();
+const { getToken, setToken, setIsLogin } = useTokenStore();
 const tokenStore = useTokenStore();
 const { getIsLogin } = storeToRefs(tokenStore)
+const  { setEmail} = useEmailStore(); 
 const { runAsync: runAsyncLogin } = useRequest(SLogin, {
     manual: true,
 })
@@ -72,16 +73,21 @@ const loginDialog = () => {
 
 const login = () => {
     runAsyncLogin(loginForm).then(res => {
+        setEmail(loginForm.email);
         setToken(res.access_token)
+        setIsLogin(true)
+        loginFormVisiable.value = false;
+        signupFormVisiable.value = false;
     }).catch(err => { console.log(err) })
 }
 if (getToken !== '') {
     // localStorage 有 token, 需要校验是否合格 
-    const { runAsync } = useRequest(validateToken, {
+    const { runAsync } = useRequest(SValidateToken, {
         manual: true,
     })
     runAsync(getToken).then(res => {
         // 校验成功 设置登录状态
+        setEmail(res)        
         setIsLogin(true)
     }).catch(err => { console.log(err) })
 }

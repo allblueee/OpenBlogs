@@ -23,4 +23,5 @@ export const useEmailStore = defineStore("Email", () => {
   function setEmail(email: string) {
     Email.value = email;
   }
+  return { getEmail, setEmail }
 });

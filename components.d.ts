@@ -26,6 +26,7 @@ declare module '@vue/runtime-core' {
     NavHeader: typeof import('./src/components/Navigation/NavHeader.vue')['default']
     Navigation: typeof import('./src/components/Navigation/index.vue')['default']
     NavItem: typeof import('./src/components/Navigation/NavItem.vue')['default']
+    NotFound: typeof import('./src/components/notFound.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
   }
