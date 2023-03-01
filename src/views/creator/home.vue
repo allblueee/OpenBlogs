@@ -4,13 +4,12 @@
             <div>
                 <!-- 个人信息 -->
                 <el-avatar src="../../../src/assets/girl.jpg" />
-                <span class="radius" style="
-                 {
-                  borderradius: 'round';
-                }
-              ">{{ getEmail }}</span>
+                <span class="radius" style="{
+                      borderradius: 'round';
+                    }
+                  ">{{ getEmail }}</span>
             </div>
-            <el-button type="primary">写文章</el-button>
+            <el-button type="primary" @click="gotoEditor">写文章</el-button>
         </el-col>
         <el-col :span="19"></el-col>
     </el-row>
@@ -22,6 +21,10 @@ import { storeToRefs } from "pinia";
 
 const emailStore = useEmailStore();
 const { getEmail } = storeToRefs(emailStore);
+const router = useRouter()
+const gotoEditor = () => {
+    router.push('/editor/drafts/new')
+}
 </script>
 
 <style scoped></style>

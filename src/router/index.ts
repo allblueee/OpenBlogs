@@ -4,8 +4,8 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      name: 'home',
-      component: ()=>import('../views/home/Home.vue'),
+      name: 'Home',
+      component: ()=>import('../views/home/home.vue'),
     },
     {
       path: '/:pathMatch(.*)*',
@@ -14,15 +14,19 @@ const router = createRouter({
     },
     {
       path: '/creator',
-      name: 'creator',
+      name: 'Creator',
       redirect: '/creator/home',
     },
     {
       path: '/creator/home',
-      name: 'creator',
+      name: 'CreatorHome',
       component: () => import('../views/creator/home.vue')
+    },
+    {
+      path: '/editor/drafts/:draftId',
+      name:'Editor',
+      component: ()=>import('../views/editor/editor.vue')
     }
-
   ],
 });
 
