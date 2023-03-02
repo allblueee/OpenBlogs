@@ -36,7 +36,7 @@ axiosInstance.interceptors.response.use(
 
 const request = <ResponseType = unknown>(
     url: string,
-    options?: AxiosRequestConfig<unknown>,
+    options?: AxiosRequestConfig<any>,
 ): Promise<ResponseType> => {
     return new Promise((resolve, reject) => {
         axiosInstance({

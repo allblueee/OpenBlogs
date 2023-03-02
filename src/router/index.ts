@@ -20,7 +20,19 @@ const router = createRouter({
     {
       path: '/creator/home',
       name: 'CreatorHome',
-      component: () => import('../views/creator/home.vue')
+      component: () => import('../views/creator/home.vue'),
+      children:[
+        {
+          path:'articles',
+          name:'articlesManage',
+          component: () => import('../views/creator/contentManage/article.vue')
+        },
+        {
+          path:'column',
+          name:'columnManage',
+          component: () => import('../views/creator/contentManage/column.vue')
+        }
+      ]
     },
     {
       path: '/editor',

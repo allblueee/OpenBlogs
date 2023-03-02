@@ -1,9 +1,10 @@
 export type IuserInfo = {
-    email: String,
-    password: String
+    email: string,
+    password: string
 }
 
 export type IArticle = {
-    title: String,
-    content: String
+    articleId: number,
+    title: string,
+    content: string
 }
