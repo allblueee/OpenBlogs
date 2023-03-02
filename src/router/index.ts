@@ -30,7 +30,7 @@ const router = createRouter({
         {
           path: 'new',
           name: 'EditorNew',
-          component: () => import('../views/editor/new.vue'),
+          component: () => import('../views/editor/editor.vue'),
         }, {
           path: 'drafts/:draftId',
           name: 'EditorDraft',

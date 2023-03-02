@@ -17,7 +17,8 @@ axiosInstance.interceptors.request.use(
 
 axiosInstance.interceptors.response.use(
     response => {
-        if (response?.status === 200) {
+        // 这个怎么便捷的设置
+        if (response?.status <= 205) {
             return Promise.resolve(response.data)
         } else {
             return Promise.reject(response)
