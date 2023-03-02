@@ -5,12 +5,12 @@ const router = createRouter({
     {
       path: '/',
       name: 'Home',
-      component: ()=>import('../views/home/home.vue'),
+      component: () => import('../views/home/home.vue'),
     },
     {
       path: '/:pathMatch(.*)*',
       name: 'NotFound',
-      component: ()=>import('../views/errorpage/notfound.vue')
+      component: () => import('../views/errorpage/notfound.vue')
     },
     {
       path: '/creator',
@@ -23,9 +23,20 @@ const router = createRouter({
       component: () => import('../views/creator/home.vue')
     },
     {
-      path: '/editor/drafts/:draftId',
-      name:'Editor',
-      component: ()=>import('../views/editor/editor.vue')
+      path: '/editor',
+      name: 'EditorIndex',
+      component: () => import('../views/editor/index.vue'),
+      children: [
+        {
+          path: 'new',
+          name: 'EditorNew',
+          component: () => import('../views/editor/new.vue'),
+        }, {
+          path: 'drafts/:draftId',
+          name: 'EditorDraft',
+          component: () => import('../views/editor/editor.vue'),
+        }
+      ]
     }
   ],
 });

@@ -1,11 +1,12 @@
 import { request } from "@/network/axios";
+import type { IArticle } from "@/type";
 
-export async function SLogin({ email, password }: IuserInfo) {
+export async function SArticleCreate({ title, content }: IArticle) {
     return request<String>('http://localhost:5173/api/article/create', {
         method: 'POST',
         data: {
-            email,
-            password
+            title,
+            content
         }
     })
 }

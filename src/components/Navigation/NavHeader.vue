@@ -1,6 +1,7 @@
 <template>
     <NavItem to="/">首页</NavItem>
     <NavItem to="/hot">热点</NavItem>
+    <div class="flex-grow"></div>
     <NavItem to="">搜索栏</NavItem>
     <NavItem to="/creator">创作者中心</NavItem>
 
@@ -50,7 +51,7 @@ import { storeToRefs } from "pinia";
 const { getToken, setToken, setIsLogin } = useTokenStore();
 const tokenStore = useTokenStore();
 const { getIsLogin } = storeToRefs(tokenStore)
-const  { setEmail} = useEmailStore(); 
+const { setEmail } = useEmailStore();
 const { runAsync: runAsyncLogin } = useRequest(SLogin, {
     manual: true,
 })
@@ -73,8 +74,8 @@ const loginDialog = () => {
 
 const login = () => {
     runAsyncLogin(loginForm).then(res => {
-        setEmail(loginForm.email);
-        setToken(res.access_token)
+        setEmail(loginForm.email as any);
+        setToken(res.access_token);
         setIsLogin(true)
         loginFormVisiable.value = false;
         signupFormVisiable.value = false;
@@ -87,11 +88,17 @@ if (getToken !== '') {
     })
     runAsync(getToken).then(res => {
         // 校验成功 设置登录状态
-        setEmail(res)        
+        setEmail(res)
         setIsLogin(true)
     }).catch(err => { console.log(err) })
 }
 
 </script>
 
-<style scoped></style>
+<style scoped>
+.flex-grow {
+    display: inline-block;
+    width: 1100px;
+    height: 1px;
+}
+</style>

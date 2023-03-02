@@ -23,7 +23,8 @@ const emailStore = useEmailStore();
 const { getEmail } = storeToRefs(emailStore);
 const router = useRouter()
 const gotoEditor = () => {
-    router.push('/editor/drafts/new')
+    // 在新页面打开
+    window.open('/editor/new','_blank')
 }
 </script>
 

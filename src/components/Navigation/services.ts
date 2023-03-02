@@ -11,7 +11,7 @@ export async function SValidateToken(token: string) {
 }
 
 export async function SLogin({ email, password }: IuserInfo) {
-    return request<String>('http://localhost:5173/api/auth/login', {
+    return request<{"access_token":''}>('http://localhost:5173/api/auth/login', {
         method: 'POST',
         data: {
             email,
