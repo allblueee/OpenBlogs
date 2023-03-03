@@ -1,9 +1,10 @@
 <template>
+    <div class="NavHeader">
     <NavItem to="/">首页</NavItem>
     <NavItem to="/hot">热点</NavItem>
     <div class="flex-grow"></div>
     <NavItem to="">搜索栏</NavItem>
-    <NavItem to="/creator">创作者中心</NavItem>
+    <NavItem to="/creator"><button class="createCenter">创作者中心</button></NavItem>
 
     <NavItem to="" v-if="!getIsLogin" @click="loginFormVisiable = true">登录/注册</NavItem>
     <NavItem to="" v-else><el-avatar src="../../../src/assets/girl.jpg" /></NavItem>
@@ -39,6 +40,7 @@
             </el-form-item>
         </el-form>
     </el-dialog>
+</div>
 </template>
 
 <script setup lang="ts">
@@ -100,5 +102,26 @@ if (getToken !== '') {
     display: inline-block;
     width: 1100px;
     height: 1px;
+}
+
+.NavHeader {
+    display: flex;
+    align-items: center;
+}
+.createCenter {
+    padding: 0 1rem;
+    font-size: 1.167rem;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    white-space: nowrap;
+    height: 100%;
+    color: #fff;
+    background-color: #1e80ff;
+    border-radius: 3px;
+    transition: background-color .1s linear .05s;
+    appearance: none;
+    border: none;
+    outline: none;
+    cursor: pointer;
 }
 </style>

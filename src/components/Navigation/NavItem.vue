@@ -10,6 +10,6 @@ defineProps<{ to: string }>()
 
 <style scoped>
 .navItem {
-    margin: 5px;
+   margin: 5px; 
 }
 </style>

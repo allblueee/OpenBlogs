@@ -15,17 +15,12 @@ const router = createRouter({
     {
       path: '/creator',
       name: 'Creator',
-      redirect: '/creator/home',
-    },
-    {
-      path: '/creator/home',
-      name: 'CreatorHome',
       component: () => import('../views/creator/home.vue'),
       children:[
         {
           path:'articles',
           name:'articlesManage',
-          component: () => import('../views/creator/contentManage/article.vue')
+          component: () => import('../views/creator/contentManage/articles/article.vue')
         },
         {
           path:'column',

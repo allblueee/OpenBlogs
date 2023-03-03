@@ -7,20 +7,22 @@
                 <span class="radius" style="{borderradius: 'round';}">{{ getEmail }}</span>
             </div>
             <el-button type="primary" @click="gotoEditor">写文章</el-button>
-            <el-menu>
+            <el-menu style="margin-right: 20px;">
                 <el-sub-menu index="1">
                     <template #title>
                         <span>内容管理</span>
                     </template>
                     <el-menu-item index="1-1">
-                        <RouterLink to="/">文章管理</RouterLink>
+                        <RouterLink to="/creator/articles">文章管理</RouterLink>
                     </el-menu-item>
-                    <el-menu-item index="1-2">专栏管理</el-menu-item>
+                    <el-menu-item index="1-2">
+                        <RouterLink to="/creator/column">专栏管理</RouterLink>
+                    </el-menu-item>
                 </el-sub-menu>
             </el-menu>
         </el-col>
         <el-col :span="19">
-            <RouterView></RouterView>
+            <RouterView style="margin-right: 200px;"></RouterView>
         </el-col>
     </el-row>
 </template>
