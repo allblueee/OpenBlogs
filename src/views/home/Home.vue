@@ -6,19 +6,24 @@
         <NavItem to="/aigc">AIGC</NavItem>
         <NavItem to="/ios">IOS</NavItem>
         <NavItem to="/android">Android</NavItem>
-        <div>标签管理</div>
+        <RouterLink id="tagManage" to="">标签管理</RouterLink>
     </div>
     <router-view></router-view>
 </template>
 <script setup lang="ts">
 import NavItem from '@/components/Navigation/NavItem.vue';
-
-
 </script>
 <style scoped>
 .classifyHeader {
     display: flex;
     background-color: white;
-    gap:15px;
+    gap: 15px;
+    align-items: center;
+    position: relative;
+}
+
+#tagManage {
+    position: absolute;
+    right: 200px;
 }
 </style>
