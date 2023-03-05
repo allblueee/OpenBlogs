@@ -14,7 +14,7 @@ defineProps<{ to: string }>()
 .nav-item {
     position: relative;
     margin-right: 5px;
-    width:52px;
+    width: 52px;
     list-style: none;
     height: 60px;
     display: flex;
