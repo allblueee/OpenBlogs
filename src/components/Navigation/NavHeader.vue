@@ -1,44 +1,56 @@
 <template>
-    <div class="NavHeader">
-        <NavItem to="/">首页</NavItem>
-        <NavItem to="/hot">热点</NavItem>
-        <div class="flex-grow"></div>
-        <NavItem to="">搜索栏</NavItem>
-        <RouterLink to="/creator"><button class="createCenter">创作者中心</button></RouterLink>
-        <el-button v-if="!getIsLogin" @click="loginFormVisiable = true">登录/注册</el-button>
-        <NavItem to="" v-else><el-avatar src="../../../src/assets/girl.jpg" /></NavItem>
-        <el-dialog v-model="loginFormVisiable">
-            <el-form :model="loginForm">
-                Welcome!
-                <el-form-item label="Email">
-                    <el-input v-model="loginForm.email" />
-                </el-form-item>
-                <el-form-item label="Password">
-                    <el-input type="password" v-model="loginForm.password" />
-                </el-form-item>
-                <el-form-item>
-                    <el-button @click="login">Login</el-button>
-                </el-form-item>
-                <el-form-item>
-                    No account? <el-link type="success" :underline="false" @click="createAccount">Create one</el-link>
-                </el-form-item>
-            </el-form>
-        </el-dialog>
-        <el-dialog v-model="signupFormVisiable">
-            <el-form :model="signupForm">
-                Welcome!
-                <el-form-item label="Email">
-                    <el-input v-model="signupForm.email" />
-                </el-form-item>
-                <el-form-item label="Password">
-                    <el-input type="password" v-model="signupForm.password" />
-                </el-form-item>
-                <el-form-item>
-                    Already have am account? <el-link type="success" :underline="false" @click="loginDialog">
-                    </el-link>
-                </el-form-item>
-            </el-form>
-        </el-dialog>
+    <div class="main-header-box">
+        <header>
+            <div class="NavHeader">
+                <ul class="nav-list">
+                    <li class="main-nav-list">
+                        <ul class="main-nav-list-ul">
+                            <NavItem to="/">首页</NavItem>
+                            <NavItem to="/hot">热点</NavItem>
+                        </ul>
+                    </li>
+                    <ul class="right-side-nav">
+                        <NavItem to="">搜索栏</NavItem>
+                        <RouterLink to="/creator"><button class="createCenter">创作者中心</button></RouterLink>
+                        <el-button v-if="!getIsLogin" @click="loginFormVisiable = true">登录/注册</el-button>
+                        <NavItem to="" v-else><el-avatar src="../../../src/assets/girl.jpg" /></NavItem>
+                    </ul>
+                    <el-dialog v-model="loginFormVisiable">
+                        <el-form :model="loginForm">
+                            Welcome!
+                            <el-form-item label="Email">
+                                <el-input v-model="loginForm.email" />
+                            </el-form-item>
+                            <el-form-item label="Password">
+                                <el-input type="password" v-model="loginForm.password" />
+                            </el-form-item>
+                            <el-form-item>
+                                <el-button @click="login">Login</el-button>
+                            </el-form-item>
+                            <el-form-item>
+                                No account? <el-link type="success" :underline="false" @click="createAccount">Create
+                                    one</el-link>
+                            </el-form-item>
+                        </el-form>
+                    </el-dialog>
+                    <el-dialog v-model="signupFormVisiable">
+                        <el-form :model="signupForm">
+                            Welcome!
+                            <el-form-item label="Email">
+                                <el-input v-model="signupForm.email" />
+                            </el-form-item>
+                            <el-form-item label="Password">
+                                <el-input type="password" v-model="signupForm.password" />
+                            </el-form-item>
+                            <el-form-item>
+                                Already have am account? <el-link type="success" :underline="false" @click="loginDialog">
+                                </el-link>
+                            </el-form-item>
+                        </el-form>
+                    </el-dialog>
+                </ul>
+            </div>
+        </header>
     </div>
 </template>
 
@@ -103,9 +115,53 @@ if (getToken !== '') {
     height: 1px;
 }
 
+.main-header-box {
+    height: 60px;
+}
+
+header {
+    height: 60px;
+    left: 0px;
+    position: fixed;
+    right: 0px;
+    top: 0px;
+    z-index: 250;
+    background-color: rgb(255, 255, 255);
+    border-bottom: 1px solid #f1f1f1;
+}
+
 .NavHeader {
+    height: 60px;
+}
+
+.right-side-nav {
     display: flex;
     align-items: center;
+    justify-content: flex-end;
+    position: relative;
+    height: 100%;
+    margin: 0;
+    order: 0;
+}
+
+.nav-list {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    flex-direction: row-reverse;
+    height: 100%;
+    padding: 0;
+    margin: 0
+}
+
+.main-nav-list {
+    display: flex;
+    order: 99;
+}
+
+.main-nav-list-ul {
+    display: flex;
 }
 
 .createCenter {

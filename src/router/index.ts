@@ -6,6 +6,43 @@ const router = createRouter({
       path: '/',
       name: 'Home',
       component: () => import('../views/home/home.vue'),
+      children: [
+        {
+          path: '/recommended',
+          name: 'recommended',
+          component: () => import('../views/home/content.vue')
+        },
+        {
+          path: '/following',
+          name: 'following',
+          component: () => import('../views/home/content.vue')
+        },
+        {
+          path: '/frontend',
+          name: 'frontend',
+          component: () => import('../views/home/content.vue')
+        },
+        {
+          path: '/backend',
+          name: 'backend',
+          component: () => import('../views/home/content.vue')
+        },
+        {
+          path: '/android',
+          name: 'android',
+          component: () => import('../views/home/content.vue')
+        },
+        {
+          path: '/ios',
+          name: 'ios',
+          component: () => import('../views/home/content.vue')
+        },
+        {
+          path: '/aigc',
+          name: 'aigc',
+          component: () => import('../views/home/content.vue')
+        }
+      ]
     },
     {
       path: '/:pathMatch(.*)*',
@@ -16,15 +53,15 @@ const router = createRouter({
       path: '/creator',
       name: 'Creator',
       component: () => import('../views/creator/home.vue'),
-      children:[
+      children: [
         {
-          path:'articles',
-          name:'articlesManage',
+          path: 'articles',
+          name: 'articlesManage',
           component: () => import('../views/creator/contentManage/articles/article.vue')
         },
         {
-          path:'column',
-          name:'columnManage',
+          path: 'column',
+          name: 'columnManage',
           component: () => import('../views/creator/contentManage/column.vue')
         }
       ]
