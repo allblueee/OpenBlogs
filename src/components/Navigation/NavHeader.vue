@@ -1,57 +1,55 @@
 <template>
-    <div class="main-header-box">
-        <header>
-            <div class="NavHeader">
-                <ul class="nav-list">
-                    <li class="main-nav-list">
-                        <ul class="main-nav-list-ul">
-                            <NavItem to="/">首页</NavItem>
-                            <NavItem to="/hot">热点</NavItem>
-                        </ul>
-                    </li>
-                    <ul class="right-side-nav">
-                        <NavItem to="">搜索栏</NavItem>
-                        <RouterLink to="/creator"><button class="createCenter">创作者中心</button></RouterLink>
-                        <el-button v-if="!getIsLogin" @click="loginFormVisiable = true">登录/注册</el-button>
-                        <NavItem to="" v-else><el-avatar src="../../../src/assets/girl.jpg" /></NavItem>
+    <header class="scroll">
+        <div class="NavHeader">
+            <ul class="nav-list">
+                <li class="main-nav-list">
+                    <ul class="main-nav-list-ul">
+                        <NavItem to="/">首页</NavItem>
+                        <NavItem to="/hot">热点</NavItem>
                     </ul>
-                    <el-dialog v-model="loginFormVisiable">
-                        <el-form :model="loginForm">
-                            Welcome!
-                            <el-form-item label="Email">
-                                <el-input v-model="loginForm.email" />
-                            </el-form-item>
-                            <el-form-item label="Password">
-                                <el-input type="password" v-model="loginForm.password" />
-                            </el-form-item>
-                            <el-form-item>
-                                <el-button @click="login">Login</el-button>
-                            </el-form-item>
-                            <el-form-item>
-                                No account? <el-link type="success" :underline="false" @click="createAccount">Create
-                                    one</el-link>
-                            </el-form-item>
-                        </el-form>
-                    </el-dialog>
-                    <el-dialog v-model="signupFormVisiable">
-                        <el-form :model="signupForm">
-                            Welcome!
-                            <el-form-item label="Email">
-                                <el-input v-model="signupForm.email" />
-                            </el-form-item>
-                            <el-form-item label="Password">
-                                <el-input type="password" v-model="signupForm.password" />
-                            </el-form-item>
-                            <el-form-item>
-                                Already have am account? <el-link type="success" :underline="false" @click="loginDialog">
-                                </el-link>
-                            </el-form-item>
-                        </el-form>
-                    </el-dialog>
+                </li>
+                <ul class="right-side-nav">
+                    <NavItem to="">搜索栏</NavItem>
+                    <RouterLink to="/creator"><button class="createCenter">创作者中心</button></RouterLink>
+                    <el-button v-if="!getIsLogin" @click="loginFormVisiable = true">登录/注册</el-button>
+                    <NavItem to="" v-else><el-avatar src="../../../src/assets/girl.jpg" /></NavItem>
                 </ul>
-            </div>
-        </header>
-    </div>
+                <el-dialog v-model="loginFormVisiable">
+                    <el-form :model="loginForm">
+                        Welcome!
+                        <el-form-item label="Email">
+                            <el-input v-model="loginForm.email" />
+                        </el-form-item>
+                        <el-form-item label="Password">
+                            <el-input type="password" v-model="loginForm.password" />
+                        </el-form-item>
+                        <el-form-item>
+                            <el-button @click="login">Login</el-button>
+                        </el-form-item>
+                        <el-form-item>
+                            No account? <el-link type="success" :underline="false" @click="createAccount">Create
+                                one</el-link>
+                        </el-form-item>
+                    </el-form>
+                </el-dialog>
+                <el-dialog v-model="signupFormVisiable">
+                    <el-form :model="signupForm">
+                        Welcome!
+                        <el-form-item label="Email">
+                            <el-input v-model="signupForm.email" />
+                        </el-form-item>
+                        <el-form-item label="Password">
+                            <el-input type="password" v-model="signupForm.password" />
+                        </el-form-item>
+                        <el-form-item>
+                            Already have am account? <el-link type="success" :underline="false" @click="loginDialog">
+                            </el-link>
+                        </el-form-item>
+                    </el-form>
+                </el-dialog>
+            </ul>
+        </div>
+    </header>
 </template>
 
 <script setup lang="ts">
@@ -60,6 +58,7 @@ import { useRequest } from "vue-hooks-plus";
 import { SLogin, SValidateToken } from "./services"
 import type { IuserInfo } from "@/type";
 import { storeToRefs } from "pinia";
+import { debounce } from "@/utils/utilFunction";
 
 const { getToken, setToken, setIsLogin } = useTokenStore();
 const tokenStore = useTokenStore();
@@ -106,6 +105,25 @@ if (getToken !== '') {
     }).catch(err => { console.log(err) })
 }
 
+let lastScrollTop = 0;
+let navbar = null as unknown as Element;
+nextTick(() => {
+    navbar = document.querySelector('.scroll') as Element;
+})
+window.addEventListener('scroll', debounce(function () {
+    let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    setTimeout(() => {
+        if (scrollTop > lastScrollTop) {
+            // 向下滚动，隐藏导航栏
+            navbar.classList.remove('visible');
+        } else {
+            // 向上滚动，显示导航栏
+            navbar.classList.add('visible');
+        }
+        lastScrollTop = scrollTop;
+    }, 0)
+}, 100));
+
 </script>
 
 <style scoped>
@@ -120,14 +138,21 @@ if (getToken !== '') {
 }
 
 header {
-    height: 60px;
-    left: 0px;
     position: fixed;
+    left: 0px;
     right: 0px;
     top: 0px;
+    height: 60px;
     z-index: 250;
     background-color: rgb(255, 255, 255);
     border-bottom: 1px solid #f1f1f1;
+    opacity: 1;
+    transition: all .2s;
+    transform: translate3d(0,-100%,0);
+}
+
+.visible {
+    transform: translateZ(0);
 }
 
 .NavHeader {
@@ -174,7 +199,6 @@ header {
     color: #fff;
     background-color: #1e80ff;
     border-radius: 3px;
-    transition: background-color .1s linear .05s;
     appearance: none;
     border: none;
     outline: none;

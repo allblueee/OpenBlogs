@@ -21,6 +21,24 @@
 </template>
 <script setup lang="ts">
 import NavItem from '@/components/Navigation/NavItem.vue';
+import { debounce } from '@/utils/utilFunction';
+let lastScrollTop = 0;
+let classifyHeader = null as unknown as Element;
+nextTick(() => {
+    classifyHeader = document.querySelector('.classify-header') as Element;
+})
+window.addEventListener('scroll', debounce(function () {
+    console.log("scroll")
+    let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+    if (scrollTop > lastScrollTop) {
+        console.log(classifyHeader.classList)
+        classifyHeader.classList.add('high');
+    } else {
+        classifyHeader.classList.remove('high');
+    }
+    lastScrollTop = scrollTop;
+}, 100));
 </script>
 <style scoped>
 .nav-item {
@@ -29,10 +47,12 @@ import NavItem from '@/components/Navigation/NavItem.vue';
     padding-left: 12px;
     padding-right: 12px;
 }
+
 .nav-item:hover ::before {
     background-color: #1e80ff;
-    width:100%;
+    width: 100%;
 }
+
 .main-container {
     position: relative;
 }
@@ -42,16 +62,20 @@ import NavItem from '@/components/Navigation/NavItem.vue';
 }
 
 .classify-header {
-    top: 60px;
     position: fixed;
-    width: 100%;
+    top: 60px;
+    left: 0;
+    right: 0;
+    height: 45.99px;
     z-index: 100;
     box-shadow: 0 1px 2px 0 rgb(0 0 0 / 5%);
-    transition: all .2s;
-    transform: translateZ(0);
-    left: 0;
     background-color: #fff;
-    height: 45.99px;
+    opacity: 1;
+    transition: all .15s;
+}
+
+.high {
+    top: 0px;
 }
 
 .nav-list {
