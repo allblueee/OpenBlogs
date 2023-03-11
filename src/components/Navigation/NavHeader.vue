@@ -1,5 +1,5 @@
 <template>
-    <header class="scroll">
+    <header class="scroll visible">
         <div class="NavHeader">
             <ul class="nav-list">
                 <li class="main-nav-list">
@@ -58,7 +58,7 @@ import { useRequest } from "vue-hooks-plus";
 import { SLogin, SValidateToken } from "./services"
 import type { IuserInfo } from "@/type";
 import { storeToRefs } from "pinia";
-import { debounce } from "@/utils/utilFunction";
+import { debounce, throttle } from "@/utils/utilFunction";
 
 const { getToken, setToken, setIsLogin } = useTokenStore();
 const tokenStore = useTokenStore();
@@ -110,19 +110,17 @@ let navbar = null as unknown as Element;
 nextTick(() => {
     navbar = document.querySelector('.scroll') as Element;
 })
-window.addEventListener('scroll', debounce(function () {
+window.addEventListener('scroll', throttle(function () {
     let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    setTimeout(() => {
-        if (scrollTop > lastScrollTop) {
-            // 向下滚动，隐藏导航栏
-            navbar.classList.remove('visible');
-        } else {
-            // 向上滚动，显示导航栏
-            navbar.classList.add('visible');
-        }
-        lastScrollTop = scrollTop;
-    }, 0)
-}, 100));
+    if (scrollTop > lastScrollTop) {
+        // 向下滚动，隐藏导航栏
+        navbar.classList.remove('visible');
+    } else {
+        // 向上滚动，显示导航栏
+        navbar.classList.add('visible');
+    }
+    lastScrollTop = scrollTop;
+}, 100))
 
 </script>
 
@@ -148,7 +146,7 @@ header {
     border-bottom: 1px solid #f1f1f1;
     opacity: 1;
     transition: all .2s;
-    transform: translate3d(0,-100%,0);
+    transform: translate3d(0, -100%, 0);
 }
 
 .visible {

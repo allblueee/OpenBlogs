@@ -15,19 +15,19 @@
                     </NavItem>
                 </div>
             </nav>
-            <router-view></router-view>
+            <router-view class="content-home"/>
         </div>
     </div>
 </template>
 <script setup lang="ts">
 import NavItem from '@/components/Navigation/NavItem.vue';
-import { debounce } from '@/utils/utilFunction';
+import { debounce, throttle } from '@/utils/utilFunction';
 let lastScrollTop = 0;
 let classifyHeader = null as unknown as Element;
 nextTick(() => {
     classifyHeader = document.querySelector('.classify-header') as Element;
 })
-window.addEventListener('scroll', debounce(function () {
+window.addEventListener('scroll', throttle(function () {
     console.log("scroll")
     let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
 
@@ -38,7 +38,7 @@ window.addEventListener('scroll', debounce(function () {
         classifyHeader.classList.remove('high');
     }
     lastScrollTop = scrollTop;
-}, 100));
+}, 50));
 </script>
 <style scoped>
 .nav-item {
@@ -71,7 +71,7 @@ window.addEventListener('scroll', debounce(function () {
     box-shadow: 0 1px 2px 0 rgb(0 0 0 / 5%);
     background-color: #fff;
     opacity: 1;
-    transition: all .15s;
+    transition: all .2s;
 }
 
 .high {
@@ -99,5 +99,8 @@ window.addEventListener('scroll', debounce(function () {
     right: 0;
     top: 0;
     text-align: center;
+}
+.content-home{
+    margin-top: 120px;
 }
 </style>

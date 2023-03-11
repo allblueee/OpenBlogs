@@ -6,8 +6,8 @@ import NavHeader from "./components/Navigation/NavHeader.vue";
 <template>
   <div class="view-container">
 
-      <NavHeader />
-    <RouterView />
+    <NavHeader />
+    <RouterView class="main-container" />
   </div>
 </template>
 
@@ -17,5 +17,8 @@ import NavHeader from "./components/Navigation/NavHeader.vue";
   margin: 0 auto;
   width: 100%;
   max-width: 960px;
+}
+.main-container {
+  margin-top: 61px;
 }
 </style>

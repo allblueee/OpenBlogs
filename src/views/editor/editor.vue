@@ -1,6 +1,8 @@
 <template>
-    <el-input placeholder="请输入标题" v-model="article.title" />
-    <Editor :value="article.content" :plugins="plugins" @change="handleChange" />
+    <div>
+        <el-input placeholder="请输入标题" v-model="article.title" />
+        <Editor :value="article.content" :plugins="plugins" @change="handleChange" />
+    </div>
 </template>
 
 <script setup lang="ts">

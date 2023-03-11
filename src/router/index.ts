@@ -10,37 +10,37 @@ const router = createRouter({
         {
           path: '/recommended',
           name: 'recommended',
-          component: () => import('../views/home/content.vue')
+          component: () => import('../views/home/content/content.vue')
         },
         {
           path: '/following',
           name: 'following',
-          component: () => import('../views/home/content.vue')
+          component: () => import('../views/home/content/content.vue')
         },
         {
           path: '/frontend',
           name: 'frontend',
-          component: () => import('../views/home/content.vue')
+          component: () => import('../views/home/content/content.vue')
         },
         {
           path: '/backend',
           name: 'backend',
-          component: () => import('../views/home/content.vue')
+          component: () => import('../views/home/content/content.vue')
         },
         {
           path: '/android',
           name: 'android',
-          component: () => import('../views/home/content.vue')
+          component: () => import('../views/home/content/content.vue')
         },
         {
           path: '/ios',
           name: 'ios',
-          component: () => import('../views/home/content.vue')
+          component: () => import('../views/home/content/content.vue')
         },
         {
           path: '/aigc',
           name: 'aigc',
-          component: () => import('../views/home/content.vue')
+          component: () => import('../views/home/content/content.vue')
         }
       ]
     },
